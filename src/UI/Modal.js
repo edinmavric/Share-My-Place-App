@@ -1,4 +1,4 @@
-class Modal {
+export class Modal {
   constructor(contentId, fallbackText) {
     this.fallbackText = fallbackText;
     this.contentTemplateEl = document.getElementById(contentId);
@@ -19,6 +19,7 @@ class Modal {
       );
 
       this.modalElement.appendChild(contentElement);
+
       document.body.insertAdjacentElement("afterbegin", this.modalElement);
       document.body.insertAdjacentElement("afterbegin", this.backdropElement);
     } else {
@@ -29,8 +30,8 @@ class Modal {
 
   hide() {
     if (this.modalElement) {
-      document.body.remove(this.modalElement);
-      document.body.remove(this.backdropElement);
+      document.body.removeChild(this.modalElement); // this.modalElement.remove()
+      document.body.removeChild(this.backdropElement);
       this.modalElement = null;
       this.backdropElement = null;
     }

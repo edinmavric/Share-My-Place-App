@@ -1,14 +1,23 @@
-document.getElementById("map").innerHTML = "";
+export class Map {
+  constructor(coords) {
+    // this.coordinates = coords;
+    this.render(coords);
+  }
 
-const map = new ol.Map({
-  target: "map",
-  layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM(),
-    }),
-  ],
-  view: new ol.View({
-    center: ol.proj.fromLonLat([coordinates.lng, coordinates.lat]),
-    zoom: 16,
-  }),
-});
+  render(coordinates) {
+    if (!google) {
+      alert("Could not load maps library - please try again later!");
+      return;
+    }
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: coordinates,
+      zoom: 16,
+    });
+
+    new google.maps.Marker({
+      position: coordinates,
+      map: map,
+    });
+  }
+}
